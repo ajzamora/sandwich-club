@@ -1,122 +1,76 @@
 package com.udacity.sandwichclub.model;
 
-import android.text.TextUtils;
-
 import java.util.List;
-
 
 public class Sandwich {
 
-    public static final String KEY_NAME = "name";
-    public static final String KEY_NAME_MAIN = "mainName";
-    public static final String KEY_NAME_AKA = "alsoKnownAs";
-    public static final String KEY_ORIGIN = "placeOfOrigin";
-    public static final String KEY_DESCRIPTION = "description";
-    public static final String KEY_IMAGE = "image";
-    public static final String KEY_INGREDIENTS = "ingredients";
+    private String mainName;
+    private List<String> alsoKnownAs = null;
+    private String placeOfOrigin;
+    private String description;
+    private String image;
+    private List<String> ingredients = null;
 
-    private String mMainName;
-    private List<String> mAlsoKnownAs;
-    private String mPlaceOfOrigin;
-    private String mDescription;
-    private String mImage;
-    private List<String> mIngredients;
-
-    private Sandwich(Builder b) {
-        mMainName = b.mainName;
-        mAlsoKnownAs = b.alsoKnownAs;
-        mPlaceOfOrigin = b.placeOfOrigin;
-        mDescription = b.description;
-        mImage = b.image;
-        mIngredients = b.ingredients;
+    /**
+     * No args constructor for use in serialization
+     */
+    public Sandwich() {
     }
 
-    public static final class Builder {
-        private String mainName;
-        private List<String> alsoKnownAs;
-        private String placeOfOrigin;
-        private String description;
-        private String image;
-        private List<String> ingredients;
-
-        public Builder() {
-            ingredients = null;
-            alsoKnownAs = null;
-        }
-
-        public Builder mainName(String mainName) {
-            this.mainName = mainName;
-            return this;
-        }
-
-        public Builder alsoKnownAs(List<String> alsoKnownAs) {
-            this.alsoKnownAs = alsoKnownAs;
-            return this;
-        }
-
-        public Builder placeOfOrigin(String placeOfOrigin) {
-            this.placeOfOrigin = placeOfOrigin;
-            return this;
-        }
-
-        public Builder description(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Builder image(String image) {
-            this.image = image;
-            return this;
-        }
-
-        public Builder ingredients(List<String> ingredients) {
-            this.ingredients = ingredients;
-            return this;
-        }
-
-        public Sandwich build() {
-            return new Sandwich(this);
-        }
-
-        @Override
-        public String toString() {
-            return "Builder{" +
-                    "mainName='" + mainName + '\'' +
-                    ", alsoKnownAs=" + alsoKnownAs +
-                    ", placeOfOrigin='" + placeOfOrigin + '\'' +
-                    ", description='" + description + '\'' +
-                    ", image='" + image + '\'' +
-                    ", ingredients=" + ingredients +
-                    '}';
-        }
+    public Sandwich(String mainName, List<String> alsoKnownAs, String placeOfOrigin, String description, String image, List<String> ingredients) {
+        this.mainName = mainName;
+        this.alsoKnownAs = alsoKnownAs;
+        this.placeOfOrigin = placeOfOrigin;
+        this.description = description;
+        this.image = image;
+        this.ingredients = ingredients;
     }
+
     public String getMainName() {
-        return mMainName;
+        return mainName;
+    }
+
+    public void setMainName(String mainName) {
+        this.mainName = mainName;
     }
 
     public List<String> getAlsoKnownAs() {
-        return mAlsoKnownAs;
+        return alsoKnownAs;
     }
-    public String getPlaceOfOrigin() {
-        return mPlaceOfOrigin;
-    }
-    public String getDescription() {
-        return mDescription;
-    }
-    public String getImage() { return mImage; }
-    public List<String> getIngredients() { return mIngredients; }
 
-    @Override
-    public String toString() {
-        return "Sandwich{" +
-                "mMainName='" + mMainName + '\'' +
-                ", mAlsoKnownAs=" + mAlsoKnownAs +
-                ", mPlaceOfOrigin='" + mPlaceOfOrigin + '\'' +
-                ", mDescription='" + mDescription + '\'' +
-                ", mImage='" + mImage + '\'' +
-                ", mIngredients=" + mIngredients +
-                '}';
+    public void setAlsoKnownAs(List<String> alsoKnownAs) {
+        this.alsoKnownAs = alsoKnownAs;
+    }
+
+    public String getPlaceOfOrigin() {
+        return placeOfOrigin;
+    }
+
+    public void setPlaceOfOrigin(String placeOfOrigin) {
+        this.placeOfOrigin = placeOfOrigin;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 }
-
-
