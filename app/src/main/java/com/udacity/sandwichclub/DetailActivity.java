@@ -109,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setLabelAndText(TextView labelTv, TextView valueTv, String value) {
         if (!TextUtils.isEmpty(value)) {
-            valueTv.setText(value.concat(value));
+            valueTv.setText(value);
             labelTv.setVisibility(View.VISIBLE);
             valueTv.setVisibility(View.VISIBLE);
         }
