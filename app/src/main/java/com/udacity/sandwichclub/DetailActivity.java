@@ -2,8 +2,10 @@ package com.udacity.sandwichclub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,8 +40,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         initUI();
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
-
         Intent intent = getIntent();
         if (intent == null) {
             closeOnError();
@@ -63,6 +63,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI(sandwich);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initUI() {
@@ -126,5 +127,17 @@ public class DetailActivity extends AppCompatActivity {
         int len = str.length();
         if (len<2) return str;
         return str.substring(1, len-1);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 }
