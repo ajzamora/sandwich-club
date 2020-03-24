@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String LOG_TAG = DetailActivity.class.getSimpleName();
@@ -59,12 +62,7 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
-        Picasso.with(this)
-                .load(sandwich.getImage())
-                .into(ingredientsIv);
-
-        setTitle(sandwich.getMainName());
+        populateUI(sandwich);
     }
 
     private void initUI() {
@@ -94,7 +92,39 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(Sandwich sandwich) {
+        setTitle(sandwich.getMainName());
+        mIngredientsIv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        Picasso.with(this)
+                .load(sandwich.getImage())
+                .placeholder(R.drawable.progress_animation)
+                .fit().centerCrop()
+                .into(mIngredientsIv);
+        setLabelAndText(mOriginLabelTv, mOriginTv, sandwich.getPlaceOfOrigin());
+        setLabelAndText(mDescriptionLabelTv, mDescriptionTv, sandwich.getDescription());
+        setLabelAndText(mAlsoKnownAsLabelTv, mAlsoKnownAsTv, sandwich.getAlsoKnownAs());
+        setLabelAndText(mIngredientsLabelTv, mIngredientsTv, sandwich.getIngredients());
+    }
 
+    private void setLabelAndText(TextView labelTv, TextView valueTv, String value) {
+        if (!TextUtils.isEmpty(value)) {
+            valueTv.setText(value);
+            labelTv.setVisibility(View.VISIBLE);
+            valueTv.setVisibility(View.VISIBLE);
+        }
+    }
+    private void setLabelAndText(TextView labelTv, TextView valueTv, List<String> val) {
+        if (!val.isEmpty()) {
+            String trimmedStrVal = trimEnds(val.toString());
+            valueTv.setText(trimmedStrVal);
+            labelTv.setVisibility(View.VISIBLE);
+            valueTv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private String trimEnds(String str) {
+        int len = str.length();
+        if (len<2) return str;
+        return str.substring(1, len-1);
     }
 }
